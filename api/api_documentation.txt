@@ -1,0 +1,50 @@
+Georgia Elections REST API Documentation - Ayush Kumar
+Invoke URL: https://qp4b96543m.execute-api.us-east-2.amazonaws.com/active
+Endpoints/Functions (place directly after invoke url) 
+/get_results
+--------------------
+Description: Returns results a particular contest. 
+--------------------
+Parameters (all optional): 
+- year (default 2016)
+- month (default 11)
+- sheet_number (default 2) 
+- result_column (default total_votes) - Options [election_day, provisional, absentee_by_mail, advance_in_person, total_votes]
+--------------------
+Python Example: 
+params = {"year": 2016, "month": 11, "result_column": "total_votes", "sheet_number": 3}
+response = requests.get("https://qp4b96543m.execute-api.us-east-2.amazonaws.com/active/get_results", params=params).text
+df = pd.read_json(response) 
+
+/get_turnout
+--------------------
+Description: Returns the turnout by demographic with optional filtering by a single gender, single race, 
+and/or single age group. 
+--------------------
+Parameters (all optional): 
+- year (default 2016)
+- month (default 11)
+- race (default None) - Options [BLACK, WHITE, ASIA-PI, NATIVE-AM, HISP-LT]
+- gender (default None) - Options [MALE, FEMALE] 
+- age_grp (default None) - Options [18-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-OVER]
+
+/get_ballot_dropoff 
+--------------------
+Description: Returns the total votes for every contest in a given county.
+--------------------
+Parameters (all optional): 
+- county_name (default Fulton) 
+- year (default 2016)
+- month (default 11) 
+
+/get_distribution 
+--------------------
+Description: Returns the distribution of total votes, total registrations, or turnout for a single county along a 
+single axis of gender, race, or age group. 
+--------------------
+Parameters (all optional): 
+- county_name (default Fulton) 
+- year (default 2016)
+- month (default 11) 
+- axis (default age_grp) - Options [age_grp, gender, race] 
+- metric (default voted) - Options [voted, registered, turnout]
