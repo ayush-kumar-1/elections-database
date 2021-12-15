@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 ## Screenshot
 
-![screenshot](img/screencapture.png)
+![screenshot](report/features.png)
 
 ## Resources
 
